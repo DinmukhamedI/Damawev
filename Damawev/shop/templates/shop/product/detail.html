@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
+{% block content %}
+<div class="container mt-3">
+    <div class="product-detail">
+        <div class="col-md-7">
+            <div class="shop card rounded-start">
+                <div class="shop card-image text-center">
+                    <img class = "img-fluid mr-3 center" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                </div>
+                <div class="shop card-body text-center">
+                    <div class="sh-brand m-auto">
+                        <span class="brandName"><h1>{{ product.name }}</h1></span>
+                    </div>
+                    <h2>
+                        <a href="{{ product.category.get_absolute_url }}">{{product.category }}</a>
+                    </h2>
+                    <h3>{{ product.description|linebreaks }}</h3>
+                    <div class="sh-price m-auto">
+                        <span class ="price"><p class="price">{{ product.price }}T</p></span>
+                    </div>
+                    <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                        {{ cart_product_form }}
+                        {% csrf_token %}
+                        <input class="btn btn-success" type="submit" value="To basket">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'shop/base.html'%}
+
+{% block title %}Update Product{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-group bg-white mt-3 text-center pb-3">
+    <form class ="mt-2" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        {{ form.as_p }}
+        {{ form.media }}
+        <button type="submit" class = "btn btn-success">Update</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

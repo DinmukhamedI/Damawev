@@ -1,0 +1,193 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="shortcut icon" href="{% static 'shop/img/log1.png' %}">
+	<script src="https://kit.fontawesome.com/5d6650f6c1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href = "{% static 'shop/css/base.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body style="background-color: #e3e3e3">
+    <div class="container">
+        <div class="top bg-secondary pt-2" style="margin-bottom:0">
+            <div class="row">
+                {% if user.is_authenticated and user.get_username == 'Dimash' %}
+                <div class="col text-left ml-5"><a href="{% url 'shop:create' %}">Create Product</a></div>
+                <div class="col text-right mr-5"><p style="color: black;font-size:15px;">{{ user.get_username }}<a href="{% url 'logout'%}?next={{request.path}}">&ensp; Logout</a></p></div>
+                {% else %}
+                <div class="col text-left ml-2"><p style="color: black;font-size:12px;">Welcome visitor you can <a href="{% url 'login' %}">login</a> or <a href="{% url 'shop:register' %}">create an account</a></p></div>
+                <div class="col text-right mr-2"><p style="color: black;font-size:12px;"><a href="{% url 'login' %}"><i class="fa fa-user" aria-hidden="true"></i> Login </a>/
+                    <a href="{% url 'shop:register' %}"> Register</a></p></div>
+                {% endif %}
+
+            </div>
+        </div>
+        <div id = "subheader">
+    <div class = "cart mt-3">
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+        In basket:
+        <a href="{% url 'cart:cart_detail' %}">
+            {{ total_items }} pc, {{ cart.get_total_price }} T
+        </a>
+        {% else %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    </div>
+    </div>
+
+    <div class="container mt-3">
+        <nav class="navbar navbar-expand-sm bg-white navbar-white">
+
+          <a class="navbar-brand col-md-2" href="#"><img src="{% static 'shop/img/log1.png' %}" alt="" class="img-fluid"></a>
+          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+          </button>
+          <div class="collapse navbar-collapse b" id="collapsibleNavbar" style="color: black;">
+           <ul class="navbar-nav col-md-5">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'shop:product_list' %}" style = "{% block color %}color:#218838;{% endblock %}"><strong>Home</strong></a>
+              </li>
+              <li class="nav-item dropdown">
+                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style = "{% block color2 %}{% endblock %}">
+                 <strong>Shop</strong>
+                 </a>
+                 <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">My Account</a>
+                    <a class="dropdown-item" href="{% url 'cart:cart_detail' %}">Cart</a>
+                 </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'shop:delivery' %}" style = "{% block color3 %}{% endblock %}"><strong>Delivery</strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link flex-grow-1" href="{% url 'shop:about' %}" style = "{% block color4 %}{% endblock %}"><strong>About us</strong></a>
+              </li>
+          </ul>
+          <form class="form-inline col-md-5" action="#">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </form>
+        </div>
+    </nav>
+</div>
+
+
+<div id = "content">
+    {% block content %}{% endblock %}
+</div>
+<div class="container mt-3">
+        <div class="footer">
+            <div class="topfooter bg-success">
+                <div class="row">
+                    <div class="col-md-3 text-center">
+                        <a href="#" class="foota"><span class="rounded-circle"><i class="fa fa-truck fa-1x pt-4" aria-hidden="true"></i></span>Free Delivery</a>
+                        <div class="sh-optional mt-2">
+                            <p style="font-size: 13px; color: white;">Fast delivery in all cities of Kazakhstan, free of charge from 7,000 tenge. The possibility of express delivery, and urgent Air shipment between cities.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <a href="#" class="foota"><span class="rounded-circle"><i class="fa fa-shield fa-1x pt-4" aria-hidden="true"></i></span> Guarantee of quality</a>
+                        <div class="sh-optional mt-2">
+                            <p style="font-size: 13px; color: white;">We provide a guarantee for every product purchased from us, and we choose only high-quality products for you.  You can purchase an extended warranty for your device.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <a href="" class="foota"><span class="rounded-circle"><i class="fa fa-home fa-1x pt-4" aria-hidden="true"></i></span>A wide network</a>
+                        <div class="sh-optional mt-2">
+                            <p style="font-size: 13px; color: white;">Fast delivery in all cities of Kazakhstan, free of charge from 7,000 tenge. The possibility of express delivery, and urgent Air shipment between cities.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <a href="" class="foota"><span class="rounded-circle"><i class="fa fa-percent fa-1x pt-4" aria-hidden="true"></i></span>Cumulative bonus</a>
+                        <div class="sh-optional mt-2">
+                            <p style="font-size: 13px; color: white;">Fast delivery in all cities of Kazakhstan, free of charge from 7,000 tenge. The possibility of express delivery, and urgent Air shipment between cities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="midfooter text-center pt-3 pb-2" style="background: seagreen;">
+                <div class="row d-flex mb-3">
+                    <div class="col-md-4 flex-fill">
+                        <p style="color: white;margin-top: 10px; font-size:15px ;">Stay up to date with the news</p>
+                    </div>
+                    <div class="col-md-4">
+                        <form class="form-inline mb-2" action="#">
+                            <input class="form-control mr-sm-2 flex-fill " type="text" placeholder="Email">
+                            <button type="submit" class="btn btn-light flex-fill">Subscribe</button>
+                        </form>
+                    </div>
+                    <div class="col-md-4 flex-fill">
+                        <span class="rounded-circle">
+                        <a href="#">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        </span>
+                        <span class="rounded-circle">
+                        <a href="#">
+                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        </span>
+                        <span class="rounded-circle">
+                        <a href="#">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        </span>
+                        <span class="rounded-circle">
+                        <a href="#">
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                        </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="midfooter2 bg-secondary pb-2">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% static 'main/img/log1-removebg-preview.png' %}" alt="">
+                        <!-- <p style="font-size: 12px; color: white;">We are experts in the world of electronics and technology, we offer to make the right choice at fair prices with first-class service, anywhere in our country.</p>
+                        <p style="font-size: 12px; color: whitesmoke;">3***, +7 (727) ***-**-**</p> -->
+                    </div>
+                    <div class="col-md-3 d-flex flex-column" style="margin-top: 20px;">
+                        <p>Online store</p>
+                        <a href="#">About the company</a>
+                        <a href="#">Retail store addresses</a>
+                        <a href="#">Addresses of service centers</a>
+                        <a href="#">Wholesale sales</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column" style="margin-top: 20px;">
+                        <p>The company "Damawev"</p>
+                        <a href="#">Public Offer Agreement</a>
+                        <a href="#">Purchase protection</a>
+                        <a href="#">Warranty and Service</a>
+                        <a href="#">Suppliers</a>
+                        <a href="#">Landlords</a>
+                    </div>
+                    <div class="col-md-2 d-flex flex-column" style="margin-top: 20px;">
+                        <p>Customer assistance</p>
+                        <a href="#">Purchases for Damawev</a>
+                        <a href="#">Карта сайта</a>
+                        <a href="#">Career in Damawev</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="botfooter bg-white text-center">
+                <p>Copyright © 2021 Damaev. All rights reserved.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+

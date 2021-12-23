@@ -1,0 +1,108 @@
+{% extends 'shop/base.html'%}
+
+{% block title %}Delivery{% endblock %}
+
+{% block color %}black{% endblock %}
+{% block color2 %}black{% endblock %}
+{% block color3 %}color:#218838;{% endblock %}
+{% block color4 %}black{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="headtext bg-light mt-3">
+        <h1 >Shipping Information </h1>
+    </div>
+    <div class="card1 rounded-start bg-warning mt-3" style="hover:none">
+        <div class="row ">
+            <div class="col-md-2 mt-4 pb-3">
+                <p class="text-center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></p>
+            </div>
+            <div class="col-md-10 mt-3 pb-3">
+                <div class="warning"><strong>There's temporary delay in order processing that may affect your estimated delivery date for some products.</strong> We'll email you as soon as your products ship. (Contain Leans orders are not impacted)</div>
+            </div>
+        </div>
+    </div>
+    <div class="forms bg-light">
+        <div class="row">
+            <div class="col-md-3 ml-5 mt-4">
+                <div class="checkboxes ">
+                    <h2>Ship to</h2>
+                    <div class="form-check">
+                        <input  type="radio" value="" id="You">
+                        <label for="You">
+                        Ship to you 4000 T
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input  type="radio" value="" id="Store">
+                        <label  for="Store">
+                        Ship to store 10000 T
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mt-3">
+                <form action="#" class="was-validated box  pt-2 pb-3">
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="fname" placeholder="First Name" name="fname" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lname" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="address" placeholder="Address" name="address" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="city" placeholder="City" name="city" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="region">Choose a region:</label>
+                        <select id="region" name="region">
+                            <option value="Almatinskaya">Almatinskaya</option>
+                            <option value="Zhambilskaya">Zhambilskaya</option>
+                            <option value="Akmolinskaya">Akmolinskaya</option>
+                            <option value="Vostochnaya">Vostochnaya</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="Email" placeholder="Email Address" name="email" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="text" class="form-control" id="Phone" placeholder="Phone Number" name="phone" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="checkbox" id="mes1" name="mes1" value="mes1">
+                        <label for="mes1">Yes! Email me the Weekly Ad, plus Online Deals & Exclusives</label><br>
+                    </div>
+                    <div class="form-group mt-2">
+                        <input type="checkbox" id="mes2" name="mes2" value="mes2">
+                        <label for="mes2">Send this order as gift</label><br>
+                    </div>
+                    <div class="form-group mt-2">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                    </div>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Are you sure?</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>The things you tipped is not changeable.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal">No</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

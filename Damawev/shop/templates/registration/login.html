@@ -1,0 +1,71 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="shortcut icon" href="{% static 'main/img/log1.png' %}">
+	<script src="https://kit.fontawesome.com/5d6650f6c1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href = "{% static 'shop/css/rsample.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body style="background-color: #e3e3e3">
+<div class="container">
+  <div class="box">
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+    {% if next %}
+          {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+          {% else %}
+            <p>Please login to see this page.</p>
+          {% endif %}
+        {% endif %}
+
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+  <h1 class="text-center" style="font-size: 3vw;">Login</h1>
+    <div class="form-group">
+        <p class ="mt-4" style="color:white; ">{{ form.username.label_tag }}</p>{{ form.username }}
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-group">
+        <p style="color:white; ">{{ form.password.label_tag }}</p>{{ form.password }}
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+
+<button type = "submit" class = "btn-success btn">Login</button>
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p class = "mt-4"><a href="{% url 'password_reset' %}" style="color:white; " >Lost password?</a></p>
+
+{% endblock %}
+</div>
+  </div>
+</body>
+</html>
